@@ -27,6 +27,8 @@ stages:
     displayName: Build
     pool:
       vmImage: $(vmImageName)
+      demands:
+      - maven
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
