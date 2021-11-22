@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: seafoodguyspringpetclinicasr 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seafoodguyspringpetclinicasr
+  template:
+    metadata:
+      labels:
+        app: seafoodguyspringpetclinicasr 
+    spec:
+      containers:
+        - name: seafoodguyspringpetclinicasr 
+          image: iconalfred.azurecr.io/seafoodguyspringpetclinicasr
+          ports:
+          - containerPort: 80
