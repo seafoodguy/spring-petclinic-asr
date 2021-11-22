@@ -1,7 +1,7 @@
 ### Multi-stage Docker file - maven build for java ###
 
 ## Stage 1/2 - Build fat JAR file with maven
-FROM ubuntu-latest
+FROM node:8
 
 RUN mkdir -p /build
 WORKDIR /build
@@ -19,7 +19,7 @@ RUN mvn package -DAPP_VERSION=v1.0 -DskipTests
 
 
 ## Stage 2/2 - Containerize the standalone JAR application
-FROM ubuntu-latest
+FROM node:8
 EXPOSE 8080
 
 ENV APP_HOME /app
