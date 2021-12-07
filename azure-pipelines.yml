@@ -36,4 +36,12 @@ stages:
           sed -i -r 's,repository: (.+),repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr,' values.yaml
           sed 's/tag:.*/tag: $(Build.BuildId)/g' values.yaml
           cat values.yaml
+          export HELM_EXPERIMENTAL_OCI=1
+          helm package .
+          helm push spring-petclinic-asr-helmchart.tgz oci://iconalfred.azurecr.io/helm
+          
+
+
+
+
 
