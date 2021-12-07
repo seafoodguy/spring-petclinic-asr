@@ -38,6 +38,7 @@ stages:
           cat values.yaml
           export HELM_EXPERIMENTAL_OCI=1
           helm package .
+          az acr login --name iconalfred
           helm push spring-petclinic-1.0.0.tgz oci://iconalfred.azurecr.io/helm
           
 
