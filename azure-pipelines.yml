@@ -38,10 +38,14 @@ stages:
           cat values.yaml
           export HELM_EXPERIMENTAL_OCI=1
           helm package .
-          az acr login --name iconalfred
-          helm push spring-petclinic-1.0.0.tgz oci://iconalfred.azurecr.io/helm
-          
-
+    - task: HelmDeploy@0
+      inputs:
+        azureSubscriptionForACR: 'iconinfo o365'
+        azureResourceGroupForACR: 'AL-AKS'
+        azureContainerRegistry: 'iconalfred.azurecr.io'
+        command: 'save'
+        chartNameForACR: 'spring-petclinic-chart'
+        chartPathForACR: 'spring-petclinic/charts'
 
 
 
