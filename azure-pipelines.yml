@@ -60,5 +60,4 @@ stages:
           sed 's/tag:.*/tag: $(Build.BuildId)/g' values.yaml
           cat values.yaml
           git commit -am 'bump up version number'
-          git remote set-url origin https://github.com/seafoodguy/spring-petclinic-asr-helmchart.git
           git push origin main
