@@ -43,7 +43,7 @@ stages:
     - upload: manifests
       artifact: manifests
 
-- stage: update helm chart
+- stage: UpdateHelmChart
   displayName: update helm chart
   jobs:
   - job: updatehelm
