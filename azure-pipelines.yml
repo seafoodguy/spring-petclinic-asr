@@ -38,7 +38,7 @@ stages:
           cat values.yaml
           export HELM_EXPERIMENTAL_OCI=1
           helm package .
-          helm push spring-petclinic-asr-helmchart.tgz oci://iconalfred.azurecr.io/helm
+          helm push spring-petclinic-1.0.0.tgz oci://iconalfred.azurecr.io/helm
           
 
 
