@@ -20,29 +20,6 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-
-- stage: Build
-  displayName: Build and push stage
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: $(vmImageName)
-      demands:
-      - maven
-    steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
-    - upload: manifests
-      artifact: manifests
-
 - stage: UpdateHelmChart
   displayName: update helm chart
   jobs:
@@ -59,5 +36,4 @@ stages:
           sed -i -r 's,repository: (.+),repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr,' values.yaml
           sed 's/tag:.*/tag: $(Build.BuildId)/g' values.yaml
           cat values.yaml
-          git commit -am 'bump up version number'
-          git push origin main
+
