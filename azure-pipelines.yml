@@ -74,6 +74,7 @@ stages:
         command: 'save'
         chartNameForACR: 'spring-petclinic-chart'
         chartPathForACR: '/home/vsts/work/1/s/spring-petclinic-asr-helmchart/spring-petclinic-1.0.0.tgz'
+
     - task: HelmDeploy@0
       inputs:
         connectionType: 'Azure Resource Manager'
@@ -84,5 +85,6 @@ stages:
         namespace: 'testns'
         command: 'install'
         chartType: 'FilePath'
-        chartPath: '/home/vsts/work/1/s/spring-petclinic-asr-helmchart'
+        chartPath: '/home/vsts/work/1/s/spring-petclinic-asr-helmchart/spring-petclinic-1.0.0.tgz'
         releaseName: 'spring-petclinic'
+        arguments: '--set image.tag=$(Build.BuildId)'
