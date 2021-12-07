@@ -52,6 +52,8 @@ stages:
     - task: CmdLine@2
       inputs:
         script: |
+          git config --global user.name azuredevops
+          git config --global user.email alfredshek@icon-info.com.hk
           git clone https://github.com/seafoodguy/spring-petclinic-asr-helmchart.git
           cd spring-petclinic-asr-helmchart
           sed -i -r 's,repository: (.+),repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr,' values.yaml
