@@ -54,7 +54,7 @@ stages:
         script: |
           git config --global user.name azuredevops
           git config --global user.email alfredshek@icon-info.com.hk
-          git clone https://seafoodguy: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@github.com/seafoodguy/spring-petclinic-asr-helmchart.git
+          git clone https://github.com/seafoodguy/spring-petclinic-asr-helmchart.git
           cd spring-petclinic-asr-helmchart
           sed -i -r 's,repository: (.+),repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr,' values.yaml
           sed 's/tag:.*/tag: $(Build.BuildId)/g' values.yaml
