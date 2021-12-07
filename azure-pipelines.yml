@@ -64,6 +64,8 @@ stages:
           sed -i -r 's,repository: (.+),repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr,' values.yaml
           sed 's/tag:.*/tag: $(Build.BuildId)/g' values.yaml
           cat values.yaml
+          export HELM_EXPERIMENTAL_OCI=1
+          helm package .
     - task: HelmDeploy@0
       inputs:
         azureSubscriptionForACR: 'iconinfo o365'
@@ -72,3 +74,15 @@ stages:
         command: 'save'
         chartNameForACR: 'spring-petclinic-chart'
         chartPathForACR: '/home/vsts/work/1/s/spring-petclinic-asr-helmchart/spring-petclinic-1.0.0.tgz'
+    - task: HelmDeploy@0
+      inputs:
+        connectionType: 'Azure Resource Manager'
+        azureSubscription: 'iconinfo o365'
+        azureResourceGroup: 'AL-AKS'
+        kubernetesCluster: 'alfredk8s'
+        useClusterAdmin: true
+        namespace: 'testns'
+        command: 'install'
+        chartType: 'FilePath'
+        chartPath: '$(System.ArtifactsDirectory)/spring-petclinic-asr-helmchart'
+        releaseName: 'spring-petclinic'
