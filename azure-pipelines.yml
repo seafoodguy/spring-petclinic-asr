@@ -44,7 +44,7 @@ stages:
         azureResourceGroupForACR: 'AL-AKS'
         azureContainerRegistry: 'iconalfred.azurecr.io'
         command: 'save'
-        chartNameForACR: 'spring-petclinic-chart'
+        chartNameForACR: 'iconalfred.azurecr.io/spring-petclinic-chart'
         chartPathForACR: 'spring-petclinic/charts'
 
 
