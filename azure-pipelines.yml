@@ -51,11 +51,8 @@ stages:
     steps:
     - task: CmdLine@2
       inputs:
-        script: 'git clone https://github.com/seafoodguy/spring-petclinic-asr-helmchart.git'
-        workingDirectory: '$(System.ArtifactsDirectory)'
-    - task: CmdLine@2
-      inputs:
         script: |
+          git clone https://github.com/seafoodguy/spring-petclinic-asr-helmchart.git
           cd spring-petclinic-asr-helmchart
           sed -i -r 's,repository: (.+),repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr,' values.yaml
           sed 's/tag:.*/tag: $(Build.BuildId)/g' values.yaml
