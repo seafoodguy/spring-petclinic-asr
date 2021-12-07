@@ -57,3 +57,6 @@ stages:
           sed -i -r 's,repository: (.+),repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr,' values.yaml
           sed 's/tag:.*/tag: $(Build.BuildId)/g' values.yaml
           cat values.yaml
+          git commit -am 'bump up version number'
+          git remote set-url origin https://github.com/seafoodguy/spring-petclinic-asr-helmchart.git
+          git push origin main
