@@ -49,6 +49,11 @@ stages:
   - job: updatehelm
     displayName: updatehelm
     steps:
+    - task: HelmInstaller@0
+      inputs:
+        helmVersion: '3.6.0'
+        checkLatestHelmVersion: false
+        installKubectl: true
     - task: CmdLine@2
       inputs:
         script: |
@@ -59,5 +64,11 @@ stages:
           sed -i -r 's,repository: (.+),repository: iconalfred.azurecr.io/seafoodguyspringpetclinicasr,' values.yaml
           sed 's/tag:.*/tag: $(Build.BuildId)/g' values.yaml
           cat values.yaml
-          git commit -am 'bump up version number'
-          git push origin main
+    - task: HelmDeploy@0
+      inputs:
+        azureSubscriptionForACR: 'iconinfo o365'
+        azureResourceGroupForACR: 'AL-AKS'
+        azureContainerRegistry: 'iconalfred.azurecr.io'
+        command: 'save'
+        chartNameForACR: 'spring-petclinic-chart'
+        chartPathForACR: '/home/vsts/work/1/s/spring-petclinic-asr-helmchart/spring-petclinic-1.0.0.tgz'
