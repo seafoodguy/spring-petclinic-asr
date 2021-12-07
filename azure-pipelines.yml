@@ -84,5 +84,5 @@ stages:
         namespace: 'testns'
         command: 'install'
         chartType: 'FilePath'
-        chartPath: '$(System.ArtifactsDirectory)/spring-petclinic-asr-helmchart'
+        chartPath: '/home/vsts/work/1/s/spring-petclinic-asr-helmchart'
         releaseName: 'spring-petclinic'
